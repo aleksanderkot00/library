@@ -37,7 +37,7 @@ public class RentalTest {
         Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
         titleRepository.save(title);
 
-        Book book = new Book(1, title);
+        Book book = new Book(BookStatus.ACTIVE, title);
         bookRepository.save(book);
 
         Date date = Date.valueOf(LocalDate.now());

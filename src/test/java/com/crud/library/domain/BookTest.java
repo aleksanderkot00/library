@@ -30,9 +30,9 @@ public class BookTest {
         titleRepository.save(title2);
 
         int initialNumberOfBooks = bookRepository.findAll().size();
-        Book book1 = new Book(1, title1);
-        Book book2 = new Book(0, title1);
-        Book book3 = new Book(1, title2);
+        Book book1 = new Book(BookStatus.ACTIVE, title1);
+        Book book2 = new Book(BookStatus.LOST, title1);
+        Book book3 = new Book(BookStatus.DESTROYED, title2);
 
         //When
         bookRepository.save(book1);

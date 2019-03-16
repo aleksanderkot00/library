@@ -10,13 +10,13 @@ public class Book {
     private Long id;
 
     @Column(name = "STATUS")
-    private int status;
+    private BookStatus status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name="TITLE_ID")
     private Title title;
 
-    public Book(int status, Title title) {
+    public Book(BookStatus status, Title title) {
         this.status = status;
         this.title = title;
     }
@@ -28,7 +28,7 @@ public class Book {
         return id;
     }
 
-    public int getStatus() {
+    public BookStatus getStatus() {
         return status;
     }
 
