@@ -22,7 +22,7 @@ public class UserTest {
     @Test
     public void testSave() {
         //Given
-        int initialUserNumber = userRepository.findAll().size();
+        int initialNumberOfUsers = userRepository.findAll().size();
         Date date1 = Date.valueOf(LocalDate.now());
         Date date2 = Date.valueOf(LocalDate.of(2012,7,23));
         User user1 = new User( "Aleksander", "Kot", date1);
@@ -31,10 +31,10 @@ public class UserTest {
         //When
         userRepository.save(user1);
         userRepository.save(user2);
-        int userNumber = userRepository.findAll().size();
+        int numberOfUsers = userRepository.findAll().size();
 
         //Then
-        Assert.assertEquals(initialUserNumber + 2, userNumber);
+        Assert.assertEquals(initialNumberOfUsers + 2, numberOfUsers);
 
         //Clean-up
         userRepository.delete(user1.getId());
