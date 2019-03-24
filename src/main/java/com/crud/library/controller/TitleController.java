@@ -3,6 +3,7 @@ package com.crud.library.controller;
 import com.crud.library.domain.Dto.TitleDto;
 import com.crud.library.mapper.TitleMapper;
 import com.crud.library.repository.TitleRepository;
+import com.crud.library.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,15 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class TitleController {
 
     @Autowired
-    private TitleRepository titleRepository;
+    private TitleService titleService;
 
     @Autowired
     private TitleMapper titleMapper;
 
     @PostMapping(value = "addTitle")
     public TitleDto addTitle(@RequestBody TitleDto titleDto) {
-//        return new TitleDto(titleDto.getTitle(),titleDto.getAuthor(),titleDto.getPublicationYear());
-//        return new TitleDto("Harry Potter", "J.K. Rowling", 2004);
-        return titleMapper.mapToTitleDto(titleRepository.save(titleMapper.mapToTitle(titleDto)));
+        return titleMapper.mapToTitleDto(titleService.addTitle(titleMapper.mapToTitle(titleDto)));
     }
 }
