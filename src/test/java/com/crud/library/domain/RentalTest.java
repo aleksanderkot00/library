@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ public class RentalTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     @Test
     public void testSaveAndFindAll() {
         //Given
@@ -70,13 +72,14 @@ public class RentalTest {
         Assert.assertTrue(rentals.contains(rental2));
 
         //CleanUp
-        rentalRepository.delete(rental1.getId());
-        rentalRepository.delete(rental2.getId());
-        bookRepository.delete(book.getId());
-        titleRepository.delete(title.getId());
-        userRepository.delete(user.getId());
+//        rentalRepository.delete(rental1.getId());
+//        rentalRepository.delete(rental2.getId());
+//        bookRepository.delete(book.getId());
+//        titleRepository.delete(title.getId());
+//        userRepository.delete(user.getId());
     }
 
+    @Transactional
     @Test
     public void testFindById() {
         //Given
@@ -102,12 +105,13 @@ public class RentalTest {
         Assert.assertEquals(rental, foundRental);
 
         //CleanUp
-        rentalRepository.delete(rental.getId());
-        userRepository.delete(user.getId());
-        bookRepository.delete(book.getId());
-        titleRepository.delete(title.getId());
+//        rentalRepository.delete(rental.getId());
+//        userRepository.delete(user.getId());
+//        bookRepository.delete(book.getId());
+//        titleRepository.delete(title.getId());
     }
 
+    @Transactional
     @Test
     public void testDelete() {
         //Given
@@ -138,11 +142,12 @@ public class RentalTest {
         Assert.assertFalse(rentals.contains(rental));
 
         //CleanUp
-        userRepository.delete(user.getId());
-        bookRepository.delete(book.getId());
-        titleRepository.delete(title.getId());
+//        userRepository.delete(user.getId());
+//        bookRepository.delete(book.getId());
+//        titleRepository.delete(title.getId());
     }
 
+    @Transactional
     @Test
     public void testDeleteById() {
         //Given
@@ -173,8 +178,8 @@ public class RentalTest {
         Assert.assertFalse(rentals.contains(rental));
 
         //CleanUp
-        userRepository.delete(user.getId());
-        bookRepository.delete(book.getId());
-        titleRepository.delete(title.getId());
+//        userRepository.delete(user.getId());
+//        bookRepository.delete(book.getId());
+//        titleRepository.delete(title.getId());
     }
 }

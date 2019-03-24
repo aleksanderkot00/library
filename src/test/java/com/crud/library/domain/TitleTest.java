@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class TitleTest {
     @Autowired
     private TitleRepository titleRepository;
 
+    @Transactional
     @Test
     public void testSaveAndFindAll() {
         //Given
@@ -38,10 +40,11 @@ public class TitleTest {
         Assert.assertTrue(titles.contains(title2));
 
         //CleanUp
-        titleRepository.delete(title1.getId());
-        titleRepository.delete(title2.getId());
+//        titleRepository.delete(title1.getId());
+//        titleRepository.delete(title2.getId());
     }
 
+    @Transactional
     @Test
     public void testFindById() {
         //Given
@@ -55,9 +58,10 @@ public class TitleTest {
         Assert.assertEquals(title, foundTitle);
 
         //CleanUp
-        titleRepository.delete(title.getId());
+//        titleRepository.delete(title.getId());
     }
 
+    @Transactional
     @Test
     public void testDelete() {
         //Given
@@ -75,6 +79,7 @@ public class TitleTest {
         Assert.assertFalse(titles.contains(title));
     }
 
+    @Transactional
     @Test
     public void testDeleteById() {
         //Given

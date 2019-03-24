@@ -20,7 +20,7 @@ public class UserTest {
     @Autowired
     private UserRepository userRepository;
 
-//    @Transactional
+    @Transactional
     @Test
     public void testSaveAndFindAll() {
         //Given
@@ -48,6 +48,7 @@ public class UserTest {
         userRepository.delete(user3.getId());
     }
 
+    @Transactional
     @Test
     public void testFindById() {
         //Given
@@ -55,15 +56,16 @@ public class UserTest {
         userRepository.save(user);
 
         //When
-        User foundUser = userRepository.findById(user.getId()).get();
+        User foundByIdUser = userRepository.findById(user.getId()).get();
 
         //Then
-        Assert.assertEquals(user, foundUser);
+        Assert.assertEquals(user, foundByIdUser);
 
         //CleanUp
-        userRepository.delete(user.getId());
+//        userRepository.delete(user.getId());
     }
 
+    @Transactional
     @Test
     public void testDelete() {
         //Given
@@ -81,6 +83,7 @@ public class UserTest {
         Assert.assertFalse(users.contains(user));
     }
 
+    @Transactional
     @Test
     public void testDeleteById() {
         //Given

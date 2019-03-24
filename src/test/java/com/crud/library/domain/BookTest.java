@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class BookTest {
     @Autowired
     private TitleRepository titleRepository;
 
+    @Transactional
     @Test
     public void testSaveAndFindAll() {
         //Given
@@ -48,13 +50,14 @@ public class BookTest {
         Assert.assertTrue(books.contains(book3));
 
         //CleanUp
-        bookRepository.delete(book1.getId());
-        bookRepository.delete(book2.getId());
-        bookRepository.delete(book3.getId());
-        titleRepository.delete(title1.getId());
-        titleRepository.delete(title2.getId());
+//        bookRepository.delete(book1.getId());
+//        bookRepository.delete(book2.getId());
+//        bookRepository.delete(book3.getId());
+//        titleRepository.delete(title1.getId());
+//        titleRepository.delete(title2.getId());
     }
 
+    @Transactional
     @Test
     public void testFindById() {
         //Given
@@ -71,9 +74,11 @@ public class BookTest {
         Assert.assertEquals(book, foundBook);
 
         //CleanUp
-        bookRepository.delete(book.getId());
-        titleRepository.delete(title.getId());
+//        bookRepository.delete(book.getId());
+//        titleRepository.delete(title.getId());
     }
+
+    @Transactional
     @Test
     public void testFindByStatusAnsTitle() {
         //Given
@@ -114,6 +119,7 @@ public class BookTest {
         titleRepository.delete(title2.getId());
     }
 
+    @Transactional
     @Test
     public void testDelete() {
         //Given
@@ -133,9 +139,10 @@ public class BookTest {
         Assert.assertFalse(books.contains(book));
 
         //CleanUp
-        titleRepository.delete(title.getId());
+//        titleRepository.delete(title.getId());
     }
 
+    @Transactional
     @Test
     public void testDeleteById() {
         //Given
@@ -155,6 +162,6 @@ public class BookTest {
         Assert.assertFalse(books.contains(book));
 
         //CleanUp
-        titleRepository.delete(title.getId());
+//        titleRepository.delete(title.getId());
     }
 }
