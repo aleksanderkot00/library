@@ -41,10 +41,6 @@ public class Book {
         this.status = status;
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

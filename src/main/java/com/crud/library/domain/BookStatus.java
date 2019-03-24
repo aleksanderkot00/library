@@ -2,7 +2,7 @@ package com.crud.library.domain;
 
 public enum BookStatus {
     AVAILABLE,
-    BORROWED,
+    RENTED,
     DESTROYED,
     LOST
 }

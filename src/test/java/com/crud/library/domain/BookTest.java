@@ -54,6 +54,6 @@ public class BookTest {
     public void testFindByTitle() {
 //        Title title = new Title("Harry Potter", "J.K. Rowling", 2004);
         Title title = titleRepository.findAll().get(0);
-        System.out.println(bookRepository.findAllByStatusAndTitle(BookStatus.BORROWED, title).size());
+        System.out.println(bookRepository.findAllByStatusAndTitle(BookStatus.RENTED, title).size());
     }
 }
