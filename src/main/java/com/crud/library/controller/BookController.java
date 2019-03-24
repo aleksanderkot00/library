@@ -1,5 +1,6 @@
 package com.crud.library.controller;
 
+import com.crud.library.domain.Book;
 import com.crud.library.domain.Dto.BookDto;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.service.BookService;
@@ -21,7 +22,12 @@ public class BookController {
         return bookMapper.mapToBookDto(bookService.addBook(bookMapper.mapToBook(bookDto)));
     }
 
-    @GetMapping(value = "numberOfBooks/{titleId}")
+    @PatchMapping(value = "updateBookStatus/{id}")
+    public BookDto updateBookStatus(@RequestBody BookDto bookDto, @PathVariable("id") Long bookId) {
+        return bookMapper.mapToBookDto(bookService.updateBookStatus(bookDto, bookId));
+    }
+
+    @GetMapping(value = "numberOfAvailableBooks/{titleId}")
     public int numberOfBooks(@PathVariable("titleId") Long titleId) {
         return bookService.numberOfAvailableBooks(titleId);
     }
