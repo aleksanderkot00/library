@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BookTest {
@@ -30,7 +28,7 @@ public class BookTest {
         titleRepository.save(title2);
 
         int initialNumberOfBooks = bookRepository.findAll().size();
-        Book book1 = new Book(BookStatus.ACTIVE, title1);
+        Book book1 = new Book(BookStatus.AVAILABLE, title1);
         Book book2 = new Book(BookStatus.LOST, title1);
         Book book3 = new Book(BookStatus.DESTROYED, title2);
 

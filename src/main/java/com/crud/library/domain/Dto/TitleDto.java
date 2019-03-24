@@ -1,7 +1,6 @@
 package com.crud.library.domain.Dto;
 
 public class TitleDto {
-    private Long id;
     private String title;
     private String author;
     private int publicationYear;
@@ -9,15 +8,10 @@ public class TitleDto {
     public TitleDto() {
     }
 
-    public TitleDto(Long id, String title, String author, int publicationYear) {
-        this.id = id;
+    public TitleDto(String title, String author, int publicationYear) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getTitle() {

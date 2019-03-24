@@ -2,6 +2,7 @@ package com.crud.library.domain;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "TITLES")
 public class Title {
@@ -42,5 +43,21 @@ public class Title {
 
     public int getPublicationYear() {
         return publicationYear;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Title title1 = (Title) o;
+        return publicationYear == title1.publicationYear &&
+                Objects.equals(id, title1.id) &&
+                Objects.equals(title, title1.title) &&
+                Objects.equals(author, title1.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, publicationYear);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -28,8 +30,12 @@ public class TitleTest {
         titleRepository.save(title2);
         int numberOfTitles = titleRepository.findAll().size();
 
+        List<Title> titles = titleRepository.findAll();
+
         //Then
         Assert.assertEquals(initialNumberOfTitles + 2, numberOfTitles);
+        Assert.assertTrue(titles.contains(title1));
+
         //Clean-up
         titleRepository.delete(title1.getId());
         titleRepository.delete(title2.getId());

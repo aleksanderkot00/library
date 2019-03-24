@@ -1,7 +1,8 @@
 package com.crud.library.domain;
 
 public enum BookStatus {
-    ACTIVE,
+    AVAILABLE,
+    BORROWED,
     DESTROYED,
     LOST
 }

@@ -14,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RentalTest {
@@ -37,7 +35,7 @@ public class RentalTest {
         Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
         titleRepository.save(title);
 
-        Book book = new Book(BookStatus.ACTIVE, title);
+        Book book = new Book(BookStatus.AVAILABLE, title);
         bookRepository.save(book);
 
         Date date = Date.valueOf(LocalDate.now());
