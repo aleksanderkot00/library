@@ -15,11 +15,12 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TitleTest {
+
     @Autowired
     private TitleRepository titleRepository;
 
     @Test
-    public void testSave() {
+    public void testSaveAndFindAll() {
         //Given
         int initialNumberOfTitles= titleRepository.findAll().size();
         Title title1 = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
@@ -28,16 +29,66 @@ public class TitleTest {
         //When
         titleRepository.save(title1);
         titleRepository.save(title2);
-        int numberOfTitles = titleRepository.findAll().size();
-
         List<Title> titles = titleRepository.findAll();
+        int numberOfTitles = titles.size();
 
         //Then
         Assert.assertEquals(initialNumberOfTitles + 2, numberOfTitles);
         Assert.assertTrue(titles.contains(title1));
+        Assert.assertTrue(titles.contains(title2));
 
-        //Clean-up
+        //CleanUp
         titleRepository.delete(title1.getId());
         titleRepository.delete(title2.getId());
+    }
+
+    @Test
+    public void testFindById() {
+        //Given
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        titleRepository.save(title);
+
+        //When
+        Title foundTitle = titleRepository.findById(title.getId()).get();
+
+        //Then
+        Assert.assertEquals(title, foundTitle);
+
+        //CleanUp
+        titleRepository.delete(title.getId());
+    }
+
+    @Test
+    public void testDelete() {
+        //Given
+        int initialNumberOfTitles = titleRepository.findAll().size();
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        titleRepository.save(title);
+
+        //When
+        titleRepository.delete(title);
+        List<Title> titles = titleRepository.findAll();
+        int numberOfTitles = titles.size();
+
+        //Then
+        Assert.assertEquals(initialNumberOfTitles, numberOfTitles);
+        Assert.assertFalse(titles.contains(title));
+    }
+
+    @Test
+    public void testDeleteById() {
+        //Given
+        int initialNumberOfTitles = titleRepository.findAll().size();
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        titleRepository.save(title);
+
+        //When
+        titleRepository.delete(title.getId());
+        List<Title> titles = titleRepository.findAll();
+        int numberOfTitles = titles.size();
+
+        //Then
+        Assert.assertEquals(initialNumberOfTitles, numberOfTitles);
+        Assert.assertFalse(titles.contains(title));
     }
 }

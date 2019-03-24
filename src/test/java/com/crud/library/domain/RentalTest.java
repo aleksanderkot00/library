@@ -13,10 +13,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RentalTest {
+
     @Autowired
     private RentalRepository rentalRepository;
 
@@ -30,35 +32,149 @@ public class RentalTest {
     private UserRepository userRepository;
 
     @Test
-    public void testSave() {
+    public void testSaveAndFindAll() {
         //Given
-        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
-        titleRepository.save(title);
-
-        Book book = new Book(BookStatus.AVAILABLE, title);
-        bookRepository.save(book);
-
-        Date date = Date.valueOf(LocalDate.now());
-        User user = new User( "Aleksander", "Kot", date);
-        userRepository.save(user);
-
-        Date returnDate = Date.valueOf(LocalDate.of(2019,3,3));
-        Date rentalDate = Date.valueOf(LocalDate.of(2018,12,3));
-        Rental rental = new Rental(book, user, rentalDate, returnDate);
-
         int initialNumberOfRentals = rentalRepository.findAll().size();
 
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        Book book = new Book(BookStatus.AVAILABLE, title);
+        User user = new User( "Aleksander", "Kot", Date.valueOf(LocalDate.now()));
+        titleRepository.save(title);
+        bookRepository.save(book);
+        userRepository.save(user);
+
+        Rental rental1 = new Rental(
+                book,
+                user,
+                Date.valueOf(LocalDate.of(2018,12,3)),
+                Date.valueOf(LocalDate.of(2019,3,3))
+        );
+
+        Rental rental2 = new Rental(
+                book,
+                user,
+                Date.valueOf(LocalDate.of(2019,3,3)),
+                Date.valueOf(LocalDate.of(2020,12,3))
+        );
+
         //When
-        rentalRepository.save(rental);
-        int numberOfRentals = rentalRepository.findAll().size();
+        rentalRepository.save(rental1);
+        rentalRepository.save(rental2);
+
+        List<Rental> rentals = rentalRepository.findAll();
+        int numberOfRentals = rentals.size();
 
         //Then
-        Assert.assertEquals(initialNumberOfRentals + 1, numberOfRentals);
+        Assert.assertEquals(initialNumberOfRentals + 2, numberOfRentals);
+        Assert.assertTrue(rentals.contains(rental1));
+        Assert.assertTrue(rentals.contains(rental2));
 
-        //Clean-up
-        rentalRepository.delete(rental.getId());
+        //CleanUp
+        rentalRepository.delete(rental1.getId());
+        rentalRepository.delete(rental2.getId());
         bookRepository.delete(book.getId());
         titleRepository.delete(title.getId());
         userRepository.delete(user.getId());
+    }
+
+    @Test
+    public void testFindById() {
+        //Given
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        Book book = new Book(BookStatus.AVAILABLE, title);
+        User user = new User( "Aleksander", "Kot", Date.valueOf(LocalDate.now()));
+        titleRepository.save(title);
+        bookRepository.save(book);
+        userRepository.save(user);
+
+        Rental rental = new Rental(
+                book,
+                user,
+                Date.valueOf(LocalDate.of(2018,12,3)),
+                Date.valueOf(LocalDate.of(2019,3,3))
+        );
+        rentalRepository.save(rental);
+
+        //When
+        Rental foundRental = rentalRepository.findById(rental.getId()).get();
+
+        //Then
+        Assert.assertEquals(rental, foundRental);
+
+        //CleanUp
+        rentalRepository.delete(rental.getId());
+        userRepository.delete(user.getId());
+        bookRepository.delete(book.getId());
+        titleRepository.delete(title.getId());
+    }
+
+    @Test
+    public void testDelete() {
+        //Given
+        int initialNumberOfRentals = rentalRepository.findAll().size();
+
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        Book book = new Book(BookStatus.AVAILABLE, title);
+        User user = new User("Aleksander", "Kot", Date.valueOf(LocalDate.now()));
+        titleRepository.save(title);
+        bookRepository.save(book);
+        userRepository.save(user);
+
+        Rental rental = new Rental(
+                book,
+                user,
+                Date.valueOf(LocalDate.of(2018, 12, 3)),
+                Date.valueOf(LocalDate.of(2019, 3, 3))
+        );
+        rentalRepository.save(rental);
+
+        //When
+        rentalRepository.delete(rental);
+        List<Rental> rentals = rentalRepository.findAll();
+        int numberOfRentals = rentals.size();
+
+        //Then
+        Assert.assertEquals(initialNumberOfRentals, numberOfRentals);
+        Assert.assertFalse(rentals.contains(rental));
+
+        //CleanUp
+        userRepository.delete(user.getId());
+        bookRepository.delete(book.getId());
+        titleRepository.delete(title.getId());
+    }
+
+    @Test
+    public void testDeleteById() {
+        //Given
+        int initialNumberOfRentals = rentalRepository.findAll().size();
+
+        Title title = new Title("The Lord of the Rings", "J. R. R. Tolkien", 2001);
+        Book book = new Book(BookStatus.AVAILABLE, title);
+        User user = new User("Aleksander", "Kot", Date.valueOf(LocalDate.now()));
+        titleRepository.save(title);
+        bookRepository.save(book);
+        userRepository.save(user);
+
+        Rental rental = new Rental(
+                book,
+                user,
+                Date.valueOf(LocalDate.of(2018, 12, 3)),
+                Date.valueOf(LocalDate.of(2019, 3, 3))
+        );
+        rentalRepository.save(rental);
+
+        //When
+        rentalRepository.delete(rental.getId());
+        List<Rental> rentals = rentalRepository.findAll();
+        int numberOfRentals = rentals.size();
+
+        //Then
+        Assert.assertEquals(initialNumberOfRentals, numberOfRentals);
+        Assert.assertFalse(rentals.contains(rental));
+
+        //CleanUp
+        userRepository.delete(user.getId());
+        bookRepository.delete(book.getId());
+        titleRepository.delete(title.getId());
     }
 }
