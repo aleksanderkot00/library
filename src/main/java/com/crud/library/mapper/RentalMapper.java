@@ -3,7 +3,7 @@ package com.crud.library.mapper;
 import com.crud.library.domain.Dto.RentalDto;
 import com.crud.library.domain.Rental;
 import com.crud.library.exception.BookNotFoundException;
-import com.crud.library.exception.UserNotFoudException;
+import com.crud.library.exception.UserNotFoundException;
 import com.crud.library.repository.BookRepository;
 import com.crud.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class RentalMapper {
 
     public Rental mapToRental(RentalDto rentalDto) {
         return new Rental(bookRepository.findById(rentalDto.getBookId()).orElseThrow(BookNotFoundException::new),
-                userRepository.findById(rentalDto.getUserId()).orElseThrow(UserNotFoudException::new),
+                userRepository.findById(rentalDto.getUserId()).orElseThrow(UserNotFoundException::new),
                 rentalDto.getRentalDate(), rentalDto.getReturnDate());
     }
 

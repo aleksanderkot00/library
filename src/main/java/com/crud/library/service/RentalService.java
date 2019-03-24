@@ -4,7 +4,7 @@ import com.crud.library.domain.Book;
 import com.crud.library.domain.BookStatus;
 import com.crud.library.domain.Rental;
 import com.crud.library.exception.BookNotFoundException;
-import com.crud.library.exception.WrongBookStatusExcepiton;
+import com.crud.library.exception.WrongBookStatusException;
 import com.crud.library.repository.BookRepository;
 import com.crud.library.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class RentalService {
 
         if (book.getStatus() == BookStatus.AVAILABLE) {
             book.setStatus(BookStatus.RENTED);
-        } else throw new WrongBookStatusExcepiton();
+        } else throw new WrongBookStatusException();
 
         bookRepository.save(book);
         return rentalRepository.save(rental);
@@ -38,7 +38,7 @@ public class RentalService {
         Book book = rental.getBook();
         if (book.getStatus() == BookStatus.RENTED) {
             book.setStatus(BookStatus.AVAILABLE);
-        } else throw new WrongBookStatusExcepiton();
+        } else throw new WrongBookStatusException();
 
         bookRepository.save(book);
         rental.setReturnDate(Date.valueOf(LocalDate.now()));
