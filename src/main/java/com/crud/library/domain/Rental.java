@@ -2,6 +2,7 @@ package com.crud.library.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity(name = "RENTALS")
 public class Rental {
@@ -52,5 +53,22 @@ public class Rental {
 
     public Date getReturnDate() {
         return returnDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rental rental = (Rental) o;
+        return Objects.equals(id, rental.id) &&
+                Objects.equals(book, rental.book) &&
+                Objects.equals(user, rental.user) &&
+                Objects.equals(rentalDate, rental.rentalDate) &&
+                Objects.equals(returnDate, rental.returnDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, book, user, rentalDate, returnDate);
     }
 }

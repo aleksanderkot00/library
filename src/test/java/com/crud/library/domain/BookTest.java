@@ -49,4 +49,11 @@ public class BookTest {
         titleRepository.delete(title1.getId());
         titleRepository.delete(title2.getId());
     }
+
+    @Test
+    public void testFindByTitle() {
+//        Title title = new Title("Harry Potter", "J.K. Rowling", 2004);
+        Title title = titleRepository.findAll().get(0);
+        System.out.println(bookRepository.findAllByStatusAndTitle(BookStatus.BORROWED, title).size());
+    }
 }
