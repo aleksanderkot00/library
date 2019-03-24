@@ -55,6 +55,10 @@ public class Rental {
         return returnDate;
     }
 
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
