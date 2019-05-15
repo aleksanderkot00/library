@@ -1,8 +1,7 @@
 package com.crud.library.controller;
 
-import com.crud.library.domain.Dto.TitleDto;
+import com.crud.library.domain.dto.TitleDto;
 import com.crud.library.mapper.TitleMapper;
-import com.crud.library.repository.TitleRepository;
 import com.crud.library.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

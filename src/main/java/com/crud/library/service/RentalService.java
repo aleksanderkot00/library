@@ -4,6 +4,7 @@ import com.crud.library.domain.Book;
 import com.crud.library.domain.BookStatus;
 import com.crud.library.domain.Rental;
 import com.crud.library.exception.BookNotFoundException;
+import com.crud.library.exception.RentalNotFounException;
 import com.crud.library.exception.WrongBookStatusException;
 import com.crud.library.repository.BookRepository;
 import com.crud.library.repository.RentalRepository;
@@ -34,7 +35,7 @@ public class RentalService {
     }
 
     public Rental returnBook(Long rentalId) {
-        Rental rental = rentalRepository.findById(rentalId).get();
+        Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFounException::new);
         Book book = rental.getBook();
         if (book.getStatus() == BookStatus.RENTED) {
             book.setStatus(BookStatus.AVAILABLE);

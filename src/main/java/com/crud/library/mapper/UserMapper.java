@@ -1,6 +1,6 @@
 package com.crud.library.mapper;
 
-import com.crud.library.domain.Dto.UserDto;
+import com.crud.library.domain.dto.UserDto;
 import com.crud.library.domain.User;
 import org.springframework.stereotype.Component;
 

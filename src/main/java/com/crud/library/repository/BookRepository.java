@@ -5,7 +5,6 @@ import com.crud.library.domain.BookStatus;
 import com.crud.library.domain.Title;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.persistence.Table;
 import java.util.List;
 import java.util.Optional;
 

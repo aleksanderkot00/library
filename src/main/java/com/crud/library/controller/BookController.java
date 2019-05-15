@@ -1,6 +1,6 @@
 package com.crud.library.controller;
 
-import com.crud.library.domain.Dto.BookDto;
+import com.crud.library.domain.dto.BookDto;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;

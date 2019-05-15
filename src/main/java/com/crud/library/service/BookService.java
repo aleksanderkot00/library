@@ -2,7 +2,7 @@ package com.crud.library.service;
 
 import com.crud.library.domain.Book;
 import com.crud.library.domain.BookStatus;
-import com.crud.library.domain.Dto.BookDto;
+import com.crud.library.domain.dto.BookDto;
 import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.exception.TitleNotFoundException;
 import com.crud.library.repository.BookRepository;
@@ -28,7 +28,7 @@ public class BookService {
                 titleRepository.findById(titleId).orElseThrow(TitleNotFoundException::new)).size();
     }
 
-    public Book updateBookStatus(BookDto updatedBook, long id) throws TitleNotFoundException {
+    public Book updateBookStatus(BookDto updatedBook, long id) {
         Book book = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
         if (updatedBook.getStatus() != null) {
             book.setStatus(updatedBook.getStatus());

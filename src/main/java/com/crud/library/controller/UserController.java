@@ -1,8 +1,6 @@
 package com.crud.library.controller;
 
-import com.crud.library.domain.Dto.TitleDto;
-import com.crud.library.domain.Dto.UserDto;
-import com.crud.library.domain.Title;
+import com.crud.library.domain.dto.UserDto;
 import com.crud.library.mapper.UserMapper;
 import com.crud.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

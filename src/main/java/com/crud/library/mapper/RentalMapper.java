@@ -1,6 +1,6 @@
 package com.crud.library.mapper;
 
-import com.crud.library.domain.Dto.RentalDto;
+import com.crud.library.domain.dto.RentalDto;
 import com.crud.library.domain.Rental;
 import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.exception.UserNotFoundException;

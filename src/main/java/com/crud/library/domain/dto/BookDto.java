@@ -1,4 +1,4 @@
-package com.crud.library.domain.Dto;
+package com.crud.library.domain.dto;
 
 import com.crud.library.domain.BookStatus;
 

@@ -1,6 +1,6 @@
 package com.crud.library.controller;
 
-import com.crud.library.domain.Dto.RentalDto;
+import com.crud.library.domain.dto.RentalDto;
 import com.crud.library.mapper.RentalMapper;
 import com.crud.library.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;

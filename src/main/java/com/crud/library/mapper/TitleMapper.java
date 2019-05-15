@@ -1,6 +1,6 @@
 package com.crud.library.mapper;
 
-import com.crud.library.domain.Dto.TitleDto;
+import com.crud.library.domain.dto.TitleDto;
 import com.crud.library.domain.Title;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +12,6 @@ public class TitleMapper {
     }
 
     public TitleDto mapToTitleDto(Title title) {
-        return new TitleDto(title.getTitle(), title.getAuthor(), title.getPublicationYear());
+        return new TitleDto(title.getTitleName(), title.getAuthor(), title.getPublicationYear());
     }
 }

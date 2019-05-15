@@ -1,4 +1,4 @@
-package com.crud.library.domain.Dto;
+package com.crud.library.domain.dto;
 
 public class TitleDto {
     private String title;
